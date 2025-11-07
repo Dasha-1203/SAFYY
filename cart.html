@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2WFYHMF8BB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2WFYHMF8BB');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - SAFYY</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .cart-item {
+            border-bottom: 1px solid #e9ecef;
+            padding: 1.5rem 0;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #dee2e6;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            margin: 0 8px;
+            padding: 6px;
+            border-radius: 4px;
+        }
+
+        .product-image-small {
+            height: 80px;
+            width: 80px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN4KDP2H" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">SAFYY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.html">Каталог</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cart.html">Корзина</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Вход</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="cart.html">
+                            Корзина
+                            <span id="cart-counter"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                style="display: none;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="mb-4">Корзина</h2>
+
+            <div id="empty-cart-message" class="text-center py-5" style="display: none;">
+                <h4>Ваша корзина пуста</h4>
+                <p>Перейдите в каталог, чтобы добавить товары</p>
+                <a href="catalog.html" class="btn btn-dark">Перейти в каталог</a>
+            </div>
+
+            <div id="cart-items-container">
+                <!-- Cart items will be loaded here by JavaScript -->
+            </div>
+
+            <div id="cart-summary" class="mt-4 p-4 bg-light rounded" style="display: none;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Итого:</h5>
+                        <p id="total-price" class="fs-4 fw-bold">0 руб.</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-dark btn-lg" id="checkout-btn">Оформить заказ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>SAFYY</h5>
+                    <p>Save and find yourself in yourself</p>
+                    <p>Найди и сохрани себя в себе</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Контакты</h5>
+                    <p>Email: info@saffy.ru</p>
+                    <p>Телефон: +7 (953) 606-17-46</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Мы в соцсетях</h5>
+                    <p>Instagram</p>
+                    <p>VK</p>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p>&copy; 2025 SAFYY.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Inline JavaScript for cart -->
+    <script>
+        console.log('🛒 SAFYY Cart - Loading cart items...');
+
+        // Get cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Initialize cart when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('🚀 Cart page initialized');
+            displayCartItems();
+            updateCartCounter();
+            setupCheckoutButton();
+        });
+
+        // Display cart items
+        function displayCartItems() {
+            const container = document.getElementById('cart-items-container');
+            const emptyMessage = document.getElementById('empty-cart-message');
+            const summary = document.getElementById('cart-summary');
+
+            if (!container || !emptyMessage || !summary) {
+                console.error('❌ Cart elements not found');
+                return;
+            }
+
+            console.log('📦 Cart items:', cart);
+
+            if (cart.length === 0) {
+                container.style.display = 'none';
+                emptyMessage.style.display = 'block';
+                summary.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            emptyMessage.style.display = 'none';
+            summary.style.display = 'block';
+
+            container.innerHTML = '';
+
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+
+                const cartItem = `
+                    <div class="cart-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <div class="product-image-small">
+                                    <div class="text-center text-muted">
+                                        <div style="font-size: 1.5rem; opacity: 0.5;">✧</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 class="mb-1">${item.name}</h5>
+                                <p class="text-muted mb-0">${item.price.toLocaleString()} руб.</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn decrease-quantity" data-index="${index}">-</button>
+                                    <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                                    <button class="quantity-btn increase-quantity" data-index="${index}">+</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="fw-bold mb-1">${itemTotal.toLocaleString()} руб.</p>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-outline-danger btn-sm remove-item" data-index="${index}">
+                                    Удалить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cartItem;
+            });
+
+            document.getElementById('total-price').textContent = `${totalPrice.toLocaleString()} руб.`;
+
+            // Add event listeners
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateQuantity(index, 1);
+                });
+            });
+
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateQuantity(index, -1);
+                });
+            });
+
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        // Update quantity
+        function updateQuantity(index, change) {
+            if (index < 0 || index >= cart.length) return;
+
+            cart[index].quantity += change;
+
+            if (cart[index].quantity <= 0) {
+                removeFromCart(index);
+            } else {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCartItems();
+                updateCartCounter();
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(index) {
+            if (index < 0 || index >= cart.length) return;
+
+            const removedItem = cart[index];
+            cart.splice(index, 1);
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+            updateCartCounter();
+
+            console.log('🗑️ Removed from cart:', removedItem.name);
+        }
+
+        // Update cart counter
+        function updateCartCounter() {
+            const cartCounter = document.getElementById('cart-counter');
+            if (!cartCounter) return;
+
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+            cartCounter.textContent = totalItems;
+            cartCounter.style.display = totalItems > 0 ? 'inline' : 'none';
+        }
+
+        // Setup checkout button
+        function setupCheckoutButton() {
+            const checkoutBtn = document.getElementById('checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function () {
+                    if (cart.length === 0) {
+                        alert('Корзина пуста');
+                        return;
+                    }
+
+                    const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                    alert(`Заказ оформлен! Сумма: ${totalPrice.toLocaleString()} руб.\n\nСпасибо за покупку!`);
+
+                    // Clear cart after checkout
+                    cart = [];
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    displayCartItems();
+                    updateCartCounter();
+                });
+            }
+        }
+
+        // If DOM is already loaded, run immediately
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', displayCartItems);
+        } else {
+            displayCartItems();
+        }
+    </script>
+</body>
+
+</html>

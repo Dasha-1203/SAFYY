@@ -1,0 +1,163 @@
+/* Custom CSS for SAFYY */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #ecf0f1;
+    --accent-color: #3498db;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.hero-section {
+    background-color: var(--secondary-color);
+    padding: 5rem 0;
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.placeholder-image {
+    background-color: #bdc3c7;
+}
+
+.card {
+    border: none;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.product-image {
+    height: 250px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+}
+
+.btn-dark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-dark:hover {
+    background-color: #1a252f;
+    border-color: #1a252f;
+}
+
+footer {
+    background-color: var(--primary-color) !important;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: var(--primary-color);
+}
+
+.form-range::-moz-range-thumb {
+    background-color: var(--primary-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d;
+}
+
+.cart-item {
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 0;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #dee2e6;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    margin: 0 5px;
+}
+
+/* Active state for navigation */
+.nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+/* Card improvements */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Form improvements */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 0;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Success messages */
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}

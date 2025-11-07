@@ -1,0 +1,14 @@
+{
+  "name": "saffy-shop",
+  "version": "1.0.0",
+  "description": "Интернет-магазин одежды SAFYY",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "server": "node server/server.js"
+  },
+  "keywords": ["shop", "clothing", "fashion"],
+  "author": "SAFYY Team",
+  "license": "MIT"
+}
